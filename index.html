@@ -224,34 +224,34 @@
             let textData = "";
 
             // Format the textData with clear labels and responses
-            textData += `Nome completo: ${formData.get("nome")}\n`;
-            textData += `Estado civil: ${formData.get("estadoCivil")}\n`;
-            textData += `Profissão: ${formData.get("profissao")}\n`;
-            textData += `Nacionalidade: ${formData.get("nacionalidade")}\n`;
-            textData += `Local de nascimento: ${formData.get("nascimento")}\n`;
-            textData += `Data de nascimento: ${formData.get("dataNascimento")}\n`;
-            textData += `RG: ${formData.get("rg")}\n`;
-            textData += `CPF: ${formData.get("cpf")}\n`;
-            textData += `Endereço completo: ${formData.get("endereco")}\n`;
-            textData += `Bairro: ${formData.get("bairro")}\n`;
-            textData += `CEP: ${formData.get("cep")}\n`;
-            textData += `Cidade: ${formData.get("cidade")}\n`;
-            textData += `Email: ${formData.get("email")}\n`;
-            textData += `Telefone: ${formData.get("telefone")}\n`;
+            textData += `*Nome completo:* ${formData.get("nome")}\n`;
+            textData += `*Estado civil:* ${formData.get("estadoCivil")}\n`;
+            textData += `*Profissão:* ${formData.get("profissao")}\n`;
+            textData += `*Nacionalidade:* ${formData.get("nacionalidade")}\n`;
+            textData += `*Local de nascimento:* ${formData.get("nascimento")}\n`;
+            textData += `*Data de nascimento:* ${formData.get("dataNascimento")}\n`;
+            textData += `*RG:* ${formData.get("rg")}\n`;
+            textData += `*CPF:* ${formData.get("cpf")}\n`;
+            textData += `*Endereço completo:* ${formData.get("endereco")}\n`;
+            textData += `*Bairro:* ${formData.get("bairro")}\n`;
+            textData += `*CEP:* ${formData.get("cep")}\n`;
+            textData += `*Cidade:* ${formData.get("cidade")}\n`;
+            textData += `*Email:* ${formData.get("email")}\n`;
+            textData += `*Telefone:* ${formData.get("telefone")}\n`;
 
             // Check for filhosMenores and format the response properly
             const filhosMenoresChecked = formData.get("filhosMenores") ? "Sim" : "Não";
-            textData += `Possui filhos menores: ${filhosMenoresChecked}\n`;
+            textData += `*Possui filhos menores:* ${filhosMenoresChecked}\n`;
 
             if (filhosMenoresChecked === "Sim") {
-                textData += `Nome completo do filho menor: ${formData.get("nomeFilho")}\n`;
-                textData += `Data de nascimento do filho: ${formData.get("dataNascimentoFilho")}\n`;
-                textData += `CPF do filho: ${formData.get("cpfFilho")}\n`;
+                textData += `*Nome completo do filho menor:* ${formData.get("nomeFilho")}\n`;
+                textData += `*Data de nascimento do filho:* ${formData.get("dataNascimentoFilho")}\n`;
+                textData += `*CPF do filho:* ${formData.get("cpfFilho")}\n`;
             }
 
-            textData += `Nome completo do italiano de: ${formData.get("nomeItaliano")}\n`;
-            textData += `Forma de pagamento: ${formData.get("pagamento")}\n`;
-            textData += `Quantas cotas irá pagar: ${formData.get("cotas")}\n`;
+            textData += `*Nome completo do italiano de:* ${formData.get("nomeItaliano")}\n`;
+            textData += `*Forma de pagamento:* ${formData.get("pagamento")}\n`;
+            textData += `*Quantas cotas irá pagar:* ${formData.get("cotas")}\n`;
 
             navigator.clipboard.writeText(textData).then(function () {
                 alert("Os dados foram copiados com sucesso!");
