@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Informações Pessoais</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        #copyButton {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #copyButton:hover {
+            background-color: #2980b9;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .child-details {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            #copyButton {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulário de Informações Pessoais</h2>
+        <form id="formulario">
+            <label for="nome">Nome completo:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="estadoCivil">Estado civil:</label>
+            <input type="text" id="estadoCivil" name="estadoCivil" required>
+
+            <label for="profissao">Profissão:</label>
+            <input type="text" id="profissao" name="profissao" required>
+
+            <label for="nacionalidade">Nacionalidade:</label>
+            <input type="text" id="nacionalidade" name="nacionalidade" required>
+
+            <label for="nascimento">Local de nascimento:</label>
+            <input type="text" id="nascimento" name="nascimento" required>
+
+            <label for="dataNascimento">Data de nascimento:</label>
+            <input type="date" id="dataNascimento" name="dataNascimento" required>
+
+            <label for="rg">RG:</label>
+            <input type="text" id="rg" name="rg" required>
+
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
+
+            <label for="endereco">Endereço completo:</label>
+            <input type="text" id="endereco" name="endereco" required>
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" required>
+
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" required>
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" name="cidade" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" required>
+
+            <label for="filhosMenores">
+                <input type="checkbox" id="filhosMenores" name="filhosMenores">
+                Possui filhos menores?
+            </label>
+
+            <div class="child-details" id="childDetails">
+                <div class="row">
+                    <div class="column">
+                        <label for="nomeFilho">Nome completo do filho menor:</label>
+                        <input type="text" id="nomeFilho" name="nomeFilho">
+                    </div>
+                    <div class="column">
+                        <label for="dataNascimentoFilho">Data de nascimento do filho:</label>
+                        <input type="date" id="dataNascimentoFilho" name="dataNascimentoFilho">
+                    </div>
+                    <div class="column">
+                        <label for="cpfFilho">CPF do filho:</label>
+                        <input type="text" id="cpfFilho" name="cpfFilho">
+                    </div>
+                </div>
+            </div>
+
+            <label for="nomeItaliano">Nome completo do italiano de:</label>
+            <input type="text" id="nomeItaliano" name="nomeItaliano">
+
+            <label for="pagamento">Forma de pagamento:</label>
+            <input type="text" id="pagamento" name="pagamento" required>
+
+            <label for="cotas">Quantas cotas irá pagar:</label>
+            <input type="text" id="cotas" name="cotas" required>
+
+            <div class="button-container">
+                <button id="copyButton" type="button">Copiar Bonitinho</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Function to apply CPF, RG, and CEP mask
+        function applyMask(input, mask) {
+            input.addEventListener('keyup', function () {
+                let value = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+                let newValue = '';
+                let maskIndex = 0;
+
+                for (let i = 0; i < value.length && maskIndex < mask.length; i++) {
+                    if (mask[maskIndex] === '-' || mask[maskIndex] === '.' || mask[maskIndex] === '/') {
+                        newValue += mask[maskIndex];
+                        maskIndex++;
+                    } else if (mask[maskIndex] === ' ') {
+                        newValue += ' ';
+                        maskIndex++;
+                    }
+                    newValue += value[i];
+                    maskIndex++;
+                }
+
+                this.value = newValue;
+            });
+        }
+
+        // Apply masks for CPF, RG, and CEP
+        applyMask(document.getElementById('cpf'), '000.000.000-00');
+        applyMask(document.getElementById('cpfFilho'), '000.000.000-00');
+        applyMask(document.getElementById('rg'), '00.000.000-0');
+        applyMask(document.getElementById('cep'), '00000-000');
+
+        document.getElementById("filhosMenores").addEventListener("change", function () {
+            var childDetails = document.getElementById("childDetails");
+            if (this.checked) {
+                childDetails.style.display = "block";
+            } else {
+                childDetails.style.display = "none";
+            }
+        });
+
+        document.getElementById("copyButton").addEventListener("click", function () {
+            const form = document.getElementById("formulario");
+            const formData = new FormData(form);
+
+            let textData = "";
+
+            // Format the textData with clear labels and responses
+            textData += `Nome completo: ${formData.get("nome")}\n`;
+            textData += `Estado civil: ${formData.get("estadoCivil")}\n`;
+            textData += `Profissão: ${formData.get("profissao")}\n`;
+            textData += `Nacionalidade: ${formData.get("nacionalidade")}\n`;
+            textData += `Local de nascimento: ${formData.get("nascimento")}\n`;
+            textData += `Data de nascimento: ${formData.get("dataNascimento")}\n`;
+            textData += `RG: ${formData.get("rg")}\n`;
+            textData += `CPF: ${formData.get("cpf")}\n`;
+            textData += `Endereço completo: ${formData.get("endereco")}\n`;
+            textData += `Bairro: ${formData.get("bairro")}\n`;
+            textData += `CEP: ${formData.get("cep")}\n`;
+            textData += `Cidade: ${formData.get("cidade")}\n`;
+            textData += `Email: ${formData.get("email")}\n`;
+            textData += `Telefone: ${formData.get("telefone")}\n`;
+
+            // Check for filhosMenores and format the response properly
+            const filhosMenoresChecked = formData.get("filhosMenores") ? "Sim" : "Não";
+            textData += `Possui filhos menores: ${filhosMenoresChecked}\n`;
+
+            if (filhosMenoresChecked === "Sim") {
+                textData += `Nome completo do filho menor: ${formData.get("nomeFilho")}\n`;
+                textData += `Data de nascimento do filho: ${formData.get("dataNascimentoFilho")}\n`;
+                textData += `CPF do filho: ${formData.get("cpfFilho")}\n`;
+            }
+
+            textData += `Nome completo do italiano de: ${formData.get("nomeItaliano")}\n`;
+            textData += `Forma de pagamento: ${formData.get("pagamento")}\n`;
+            textData += `Quantas cotas irá pagar: ${formData.get("cotas")}\n`;
+
+            navigator.clipboard.writeText(textData).then(function () {
+                alert("Os dados foram copiados com sucesso!");
+            }, function () {
+                alert("Falha ao copiar os dados.");
+            });
+        });
+    </script>
+</body>
+</html>
